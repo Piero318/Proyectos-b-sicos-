@@ -1,0 +1,48 @@
+
+#include <Servo.h>
+
+int pos = 0;
+Servo servo_9;
+
+
+void setup() {
+pinMode(2,OUTPUT);
+Serial.begin(9600);
+servo_9.attach(9, 500, 2500);
+
+
+
+}
+
+void loop() {
+ 
+  if(Serial.available()){
+  int dato=Serial.read();
+  
+  if(dato=='A'){
+  digitalWrite(2,HIGH);
+  digitalWrite(9,HIGH);
+  
+  delay(15);
+  }
+   
+  if(dato=='B'){
+  digitalWrite(2,LOW);
+  digitalWrite(9,LOW);
+
+  delay(15);
+  }
+
+   for (pos = 0; pos <= 180; pos += 1) {
+
+    servo_9.write(pos);
+   
+    delay(15); 
+  }
+  for (pos = 180; pos >= 0; pos -= 1) {
+    servo_9.write(pos);
+    delay(15); 
+  }
+
+}
+}
